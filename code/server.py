@@ -6,16 +6,20 @@ import cv2
 # Initialize the Flask application
 app = Flask(__name__)
 
-
+new_name = 'stst'
 # route http posts to this method
-@app.route('/api/test', methods=['POST'])
-def test():
+
+@app.route('/saveimage/<string:name>', methods=['POST'])
+def test(name):
+    global new_name
+    new_name = name
     r = request
     # convert string of image data to uint8
-    nparr = np.fromstring(r.data, np.uint8)
+    print(name)
+    nparr = np.frombuffer(r.data, np.uint8)
     # decode image
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    cv2.imwrite('download2.jpg', img)
+    cv2.imwrite(f"images/{name}.jpg", img)
 
     # do some fancy processing here....
 
@@ -28,12 +32,28 @@ def test():
     return Response(response=response_pickled, status=200, mimetype="application/json")
 
 #UPON REQUEST sending image to Receiver (and then deleteing image 1 minute after sending)
-@app.route("/get_image")
-def get_image():
-
-    return send_from_directory('./', 'get.jpg', as_attachment=True)
+@app.route("/lol_idk")
+def lol_idk():
+    send_from_directory('./', f"{new_name}.jpg", as_attachment=True)
+    return Response(response=new_name, mimetype="text")
     #return send_file(img, mimetype='image/gif', as_attachment=True)
 #UPON REQUEST receiving image from Sender
+#send to client
+@app.route("/get_image", methods=['GET'])
+def get_image():
+    r = request
+    print(f"line 24 new_name: {new_name}\n")
+    img = cv2.imread(f"images/{new_name}.jpg")
+    print("line 47")
+    # encode image as jpeg
+    _, img_encoded = cv2.imencode('.jpg', img)
+    print(f"img_enc: {type(img_encoded)}\nimg:{img_encoded}")
+
+    response = {'name': new_name,
+                'img': img_encoded.tostring()
+                }
+    responsep = jsonpickle.encode(response)
+    return Response(response=responsep, status=200, mimetype="application/json")
 
 
 # start flask app
