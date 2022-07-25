@@ -1,0 +1,18 @@
+[
+    {
+        "first_name": "liz",
+        "image": "images/liz/liz.jpg"
+    },
+    {
+        "first_name": "vik",
+        "image": "./images/vik.jpg"
+    },
+    {
+        "first_name": "conan",
+        "image": "./images/conan.jpg"
+    },
+    {
+        "first_name": "george",
+        "image": "./images/george.jpg"
+    }
+]
