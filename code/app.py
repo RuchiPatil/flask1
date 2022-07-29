@@ -39,12 +39,12 @@ def get_image():
     '''
     send EMAIL/SMS
     '''
-    print(faces_found)
+    #print(faces_found)
     '''
     if faces_found[i]['unlocking'] = 'yes' (in users_enc.json), then
     write yes/no  to lock.text
      '''
-    toUnlock = "NO or YES"
+    toUnlock = f"NO or YES and person is {faces_found}"
     delete("who.jpg")
     return Response(response=toUnlock, status=200, mimetype="text/xml")
 
