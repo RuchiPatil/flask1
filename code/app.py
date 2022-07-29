@@ -44,7 +44,7 @@ def get_image():
     if faces_found[i]['unlocking'] = 'yes' (in users_enc.json), then
     write yes/no  to lock.text
      '''
-    toUnlock = f"NO or YES and person is {faces_found}"
+    toUnlock = f"NO or YES and person is {faces_found.toString()}"
     delete("who.jpg")
     return Response(response=toUnlock, status=200, mimetype="text/xml")
 
