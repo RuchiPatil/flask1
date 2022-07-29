@@ -32,7 +32,7 @@ def old_download_image():
 
 #UPON REQUEST receiving image from Sender
 #send to client
-@app.route("/get_image", methods=['GET', 'POST'])
+@app.route("/get_image", methods=['GET'])
 def get_image():
     imgToComp = getDoorImage(request, "who.jpg")
     faces_found = compare_faces(imgToComp)
