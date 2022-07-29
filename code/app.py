@@ -46,7 +46,7 @@ def get_image():
      '''
     toUnlock = f"NO or YES and person is {faces_found.toString()}"
     delete("who.jpg")
-    return Response(response=toUnlock, status=200, mimetype="text/xml")
+    return Response(response="toUnlock", status=200, mimetype="text/xml")
 
 
 
