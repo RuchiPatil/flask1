@@ -3,7 +3,7 @@ import face_recognition
 import json
 import cv2
 import os
-
+from gen_func import *
 '''
 AI Module : Functions that perform detection and recognition; are
 called by the scheduler
@@ -21,33 +21,20 @@ def write_encodings(newNames):
         face_encoding = face_recognition.face_encodings(reco_image)[0]
 
         # add check here to make sure there are faces in the image
-        all_face_locations = face_recognition.face_locations(image_to_reco, model="hog")
-        if all_face_locations < 1:
+        all_face_locations = face_recognition.face_locations(reco_image, model="hog")
+        print(f'num of faces : {len(all_face_locations)}')
+        if len(all_face_locations) < 1:
             raise Exception("no faces in new-member pic")
-        #save face encoding in json: user_enc.json
-        jsonFile = 'USER_ENC/user_enc.json'
-        newObj = []
-        if os.path.isfile(jsonFile) is False:
-            raise Exception("users.json File NOT found.")
-
-        with open(jsonFile) as fp:
-            newObj = json.load(fp)
-        enc = face_encoding.tolist()
-
-        newObj.append({
-        "first_name": newNames[x],
-        "enc": enc
-        })
-
-        with open(jsonFile, 'w') as json_file:
-            json.dump(newObj, json_file, indent=4, separators=(',', ': '))
-    return 'Wrote to user_enc.json'
+        #save face encoding in json: users.json
+        jsonFile = 'USERS/users.json'
+        writeToJson(jsonFile, newNames[x], face_encoding)
+    return 'Wrote to users.json'
 # ----------------------------------------------------- GET ENCODINGS
 def get_encodings():
     known_face_names = []
     known_face_encodings = []
 
-    with open('USER_ENC/user_enc.json', 'r') as file:
+    with open('USERS/users.json', 'r') as file:
         enc_data = json.load(file)
 
     for x in range(0, len(enc_data)):
@@ -57,7 +44,7 @@ def get_encodings():
     return known_face_encodings, known_face_names
 
 # ------------------------------------------------------- COMPARE DETECTECTED
-def compare(site_cap_image):
+def compare_faces(site_cap_image):
 
     face_enc, name_enc = get_encodings()
     #print(f"face_encodings: {face_enc}")
@@ -96,4 +83,8 @@ def compare(site_cap_image):
 
     return faces_found
 
-#lets test if the program can recognize liz lemon
+
+
+
+
+#eof
