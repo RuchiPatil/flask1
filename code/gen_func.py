@@ -3,8 +3,11 @@ import json
 import numpy as np
 import cv2
 import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 def getDoorImage(r, doorimg):
+
     #get image from client
     r = request
     # convert string of image data to uint8
@@ -12,6 +15,7 @@ def getDoorImage(r, doorimg):
     # decode image
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     cv2.imwrite(doorimg, img)
+    print("boom")
 
     '''
     # ESP-VERSION
@@ -31,6 +35,22 @@ def getDoorImage(r, doorimg):
         print(f"waht {glob.glob('../../../downloads/pic.jpg')}")
     # __________________________________ EOF MOCK VERSION
     '''
+def sendEmail(faces_found):
+
+    message = Mail(
+        from_email='theverycleverbell@gmail.com',
+        to_emails='ruchipatil@outlook.com',
+        subject='Sending with Twilio SendGrid is Fun',
+        html_content=f'<strong>faces found: {faces_found}</strong>')
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e.message)
+
 def deleteImage(img):
     os.remove(img)
 

@@ -73,17 +73,15 @@ def compare_faces(site_cap_image):
             person_name = name_enc[first_match_index]
         faces_found.append(person_name)
 
-            # visual label
+        '''    # visual label
         cv2.rectangle(cv_site_cap_image, (l_p, t_p), (r_p, b_p), (255, 0, 0), 2)
 
         font = cv2.FONT_HERSHEY_DUPLEX
         cv2.putText(cv_site_cap_image, person_name, (l_p, b_p), font, 0.5, (255, 255, 255), 1)
 
-        cv2.imshow('Identified', cv_site_cap_image)
+        cv2.imshow('Identified', cv_site_cap_image)'''
 
     return faces_found
-
-
 
 
 

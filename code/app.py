@@ -34,19 +34,23 @@ def old_download_image():
 #send to client
 @app.route("/get_image", methods=['GET'])
 def get_image():
-    imgToComp = getDoorImage(request, "who.jpg")
-    faces_found = compare_faces(imgToComp)
-    '''
-    send EMAIL/SMS
-    '''
-    #print(faces_found)
+    r = request
+    # convert string of image data to uint8
+    nparr = np.fromstring(r.data, np.uint8)
+    # decode image
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    cv2.imwrite("who.jpg", img)
+
+    faces_found = compare_faces("who.jpg")
+    sendEmail(faces_found)
+    print(faces_found)
     '''
     if faces_found[i]['unlocking'] = 'yes' (in users_enc.json), then
     write yes/no  to lock.text
      '''
-    toUnlock = f"NO or YES and person is {faces_found.toString()}"
-    delete("who.jpg")
-    return Response(response="toUnlock", status=200, mimetype="text/xml")
+    toUnlock = f"NO or YES and person is {faces_found}"
+    deleteImage("who.jpg")
+    return Response(response=toUnlock, status=200, mimetype="text/xml")
 
 
 
