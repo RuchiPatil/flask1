@@ -44,11 +44,12 @@ def get_image():
     faces_found = compare_faces("who.jpg")
     sendEmail(faces_found)
     print(faces_found)
-    '''
-    if faces_found[i]['unlocking'] = 'yes' (in users_enc.json), then
-    write yes/no  to lock.text
-     '''
-    toUnlock = f"NO or YES and person is {faces_found}"
+
+    if (faces_found.count("unknown") == len(faces_found)):
+        toUnlock = "no"
+    else:
+        toUnlock = "yes"
+
     deleteImage("who.jpg")
     return Response(response=toUnlock, status=200, mimetype="text/xml")
 

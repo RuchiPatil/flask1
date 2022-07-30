@@ -9,7 +9,7 @@ print(my_sg)
 from_email = Email("theverycleverbell@gmail.com")
 
 # Change to your recipient
-to_email = To("ruchipatil1@gmail.com")
+to_email = To("ruchipatil1@gmail.com", "viktor.vcz88@gmail.com")
 
 subject = "tinalouisegene"
 content = Content("text/plain", "uhhhhhhhhhh uh uh uhhhhh")
