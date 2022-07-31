@@ -39,7 +39,7 @@ def sendEmail(faces_found):
 
     message = Mail(
         from_email='theverycleverbell@gmail.com',
-        to_emails='ruchipatil@outlook.com',
+        to_emails='ruchipatil@outlook.com, viktor.vcz88@gmail.com',
         subject='Sending with Twilio SendGrid is Fun',
         html_content=f'<strong>faces found: {faces_found}</strong>')
     try:
