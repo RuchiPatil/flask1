@@ -15,26 +15,8 @@ def getDoorImage(r, doorimg):
     # decode image
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     cv2.imwrite(doorimg, img)
-    print("boom")
+    print("linda/blom")
 
-    '''
-    # ESP-VERSION
-    webserver_path = 'http://192.168.2.120/saved-photo'
-    captured_image = 'site_photo.jpg'
-    # This line grabs the image from the webserver and saves in CWD as 'site_photo.jpg'
-    urllib.request.urlretrieve(webserver_path, captured_image)
-    #EOF ESP-VERSION
-
-    # _________________________________ MOCK VERSION
-    mock_url = 'http://127.0.0.1:81'
-    urllib.request.urlretrieve(mock_url)
-    if len(glob.glob('../../../downloads/pic.jpg')) > 0:
-        print("pic found in downloads")
-        shutil.move('../../../downloads/pic.jpg', './')
-    else:
-        print(f"waht {glob.glob('../../../downloads/pic.jpg')}")
-    # __________________________________ EOF MOCK VERSION
-    '''
 def sendEmail(faces_found):
 
     message = Mail(
@@ -85,8 +67,6 @@ def writeToJson(jsonFile, newName, face_encoding):
 
     with open(jsonFile, 'w') as json_file:
         json.dump(newObj, json_file, indent=4, separators=(',', ': '))
-
-
 
 
 
