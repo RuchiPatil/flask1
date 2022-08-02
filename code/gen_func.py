@@ -67,7 +67,7 @@ def writeToJson(jsonFile, newName, face_encoding):
 
     with open(jsonFile, 'w') as json_file:
         json.dump(newObj, json_file, indent=4, separators=(',', ': '))
-
+sendEmail(["hfkajshljskahfls"])
 
 
 
