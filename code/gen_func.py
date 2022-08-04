@@ -32,13 +32,13 @@ def sendSMS(faces_found):
     for number in numbers:
         message = client.messages.create(
                                       from_='+19382225448',
-                                      body =faces_found,
+                                      body =str(faces_found),
                                       to = number
                                   )
 
         print(message.sid)
-def sendEmail(faces_found):
 
+def sendEmail(faces_found):
     message = Mail(
         from_email='theverycleverbell@gmail.com',
         to_emails='ruchipatil@outlook.com, viktor.vcz88@gmail.com',

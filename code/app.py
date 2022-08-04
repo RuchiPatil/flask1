@@ -42,7 +42,7 @@ def get_image():
     cv2.imwrite("who.jpg", img)
 
     faces_found = compare_faces("who.jpg")
-    sendEmail(faces_found)
+    #sendEmail(faces_found)
     sendSMS(faces_found)
     print(faces_found)
 
