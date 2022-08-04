@@ -27,7 +27,7 @@ def sendSMS(faces_found):
     #Change the value of 'from' with the number
     #received from Twilio and the value of 'to'
     #with the number in which you want to send message.
-    numbers = ['+16473909082', '+15197744393']
+    numbers = ['+16473909082', '+15197744393', '+16475289062']
     for number in numbers:
         message = client.messages.create(
                                       from_='+19382225448',
