@@ -19,8 +19,7 @@ def getDoorImage(r, doorimg):
 
 def sendSMS(faces_found):
     account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-    print("fjsdh")
-    #print(os.environ.get('TWILIO_ACCOUNT_SID'))
+
     auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 
     client = Client(account_sid, auth_token)
@@ -28,13 +27,15 @@ def sendSMS(faces_found):
     #Change the value of 'from' with the number
     #received from Twilio and the value of 'to'
     #with the number in which you want to send message.
-    message = client.messages.create(
-                                  from_='+19382225448',
-                                  body =faces_found,
-                                  to ='+16473909082'
-                              )
+    numbers = ['+16473909082', '+15197744393']
+    for number in numbers:
+        message = client.messages.create(
+                                      from_='+19382225448',
+                                      body =faces_found,
+                                      to = number
+                                  )
 
-    print(message.sid)
+        print(message.sid)
 def sendEmail(faces_found):
 
     message = Mail(
