@@ -79,4 +79,4 @@ def find_new_faces():
         with open(jsonFile, 'w') as json_file:
             json.dump(newObj, json_file, indent=4, separators=(',', ': '))'''
     return newNames
-find_new_faces()
+#find_new_faces()
