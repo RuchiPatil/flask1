@@ -6,6 +6,7 @@ from datetime import timedelta
 import urllib
 import json
 import os
+import re
 #djlskf
 # VARIABLES USED --------------------------------------------------------------------------------------------
 cred = credentials.Certificate("./fire/key.json")
@@ -17,6 +18,7 @@ config = {
   "databaseURL": "https://cappstone-fcf0f-default-rtdb.firebaseio.com",
   "projectId": "cappstone-fcf0f",
   "storageBucket": "cappstone-fcf0f.appspot.com",
+  "serviceAccount": "./fire/key.json",
   "messagingSenderId": "457263544867",
   "appId": "1:457263544867:web:0566601951f5a5a53b8f96",
   "measurementId": "G-VRRYSXR6VF"
@@ -24,10 +26,11 @@ config = {
 
 def find_new_faces():
     firebase = pyrebase.initialize_app(config)
+    storage = firebase.storage()
     database = firebase.database()
     # Read Data - list of names from firebase db
     fireNames = list(database.child("Posts").get().val())
-    #print(fireNames)
+    print(fireNames)
 
     #List of names in users.json
     with open('USERS/users.json', 'r') as jsonFile:
@@ -38,15 +41,26 @@ def find_new_faces():
     #LIST of new-member images (names) to download
     newNames = list(set(fireNames) - set(jsonNames))
     print(newNames)
+    #storage.child(f"jensen.jpg").download("images/louise.jpg")
+    all_images = storage.list_files()
+    for image in all_images:
+        #lename = re.search('images/(.+?).jpg', image.name).group(1)
+        person_name = image.name.split("images/")[-1].split(".jpg")[0]
+        if person_name in newNames:
+            print(person_name)
+            img_name = f"images/{person_name}.jpg"
+            storage.child(image.name).download(img_name)
 
     #download new member images, and save in images, and add to users.json
-    for i in range(0, len(newNames)):
+    '''for i in range(0, len(newNames)):
         #DONWLOAD IMAGE according to db comparison with user.json
-        bucket = storage.bucket(app=app)
-        blob = bucket.blob(f"images/{newNames[i]}.jpg")
+        #bucket = storage.bucket(app=app)
+        #blob = bucket.blob(f"images/{newNames[i]}.jpg")
         #print(blob.generate_signed_url(timedelta(seconds=300), method='GET'))
         #3999d5a4-fcdf-455a-954c-355deb3ae072
-        urllib.request.urlretrieve(blob.generate_signed_url(timedelta(seconds=300), method='GET'), f"./images/{newNames[i]}.jpg")
+        #urllib.request.urlretrieve(blob.generate_signed_url(timedelta(seconds=300), method='GET'), f"./images/{newNames[i]}.jpg")
+        #storage.child(f"images/{newNames[i]}.jpg").download(f"./images/{newNames[i]}.jpg")
+        print(i)
 
         #add new-member to users.json
         jsonFile = 'USERS/users.json'
@@ -63,5 +77,6 @@ def find_new_faces():
         })
 
         with open(jsonFile, 'w') as json_file:
-            json.dump(newObj, json_file, indent=4, separators=(',', ': '))
+            json.dump(newObj, json_file, indent=4, separators=(',', ': '))'''
     return newNames
+find_new_faces()
