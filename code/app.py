@@ -19,7 +19,6 @@ def zuko_print():
     ''' ok so in find_new_faces, another read for unlocking module
     then, add to encoding json (also do we need just users.json?)
     '''
-    return Response(response="new-member added", mimetype="text")
 
 
 #UPON REQUEST sending image to Receiver (and then deleteing image 1 minute after sending)
