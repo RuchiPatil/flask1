@@ -11,7 +11,7 @@ new_name = 'stst' #do we need this? used in old_download_image
 # route http posts to this method
 
 #RIGHT NOW WE ARE USING ZUKO PRINT TO ADD NEW MEMBERS - change name of function and TELL VIKTOR
-@app.route('/zuko_print', methods=['GET'])
+@app.route('/zuko_print', methods=['POST'])
 def zuko_print():
     newNames = find_new_faces() #add new-member images to /images and new-members to users.json
     #now add new new names to known encodings
