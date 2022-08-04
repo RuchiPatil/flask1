@@ -32,7 +32,7 @@ message = Mail(
     subject='tine gene louise ',
     html_content=f'<strong>oh boo</strong>')
 try:
-    sg = SendGridAPIClient('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')#os.environ.get('SENDGRID_API_KEY'))
+    sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
     response = sg.send(message)
     print(response.status_code)
 except Exception as e:
