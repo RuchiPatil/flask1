@@ -4,12 +4,16 @@ import cv2
 from fire_func import find_new_faces
 from ai_func import *
 from gen_func import *
+import time
 # Initialize the Flask application
 app = Flask(__name__)
 
 new_name = 'stst' #do we need this? used in old_download_image
 # route http posts to this method
 
+while(1):
+    find_new_faces()
+    time.sleep(20)
 #RIGHT NOW WE ARE USING ZUKO PRINT TO ADD NEW MEMBERS - change name of function and TELL VIKTOR
 @app.route('/zuko_print', methods=['POST'])
 def zuko_print():
