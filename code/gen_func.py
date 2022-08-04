@@ -5,6 +5,7 @@ import cv2
 import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from twilio.rest import Client
 
 def getDoorImage(r, doorimg):
 

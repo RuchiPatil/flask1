@@ -2,6 +2,8 @@
 # importing twilio
 from twilio.rest import Client
 import os
+from sendgrid import SendGridAPIClient, helpers
+from sendgrid.helpers.mail import Mail
 # Your Account Sid and Auth Token from twilio.com / console
 account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 
@@ -21,14 +23,11 @@ for number in numbers:
                               )
 
     print(message.sid)
-'''
-import os
-from sendgrid import SendGridAPIClient, helpers
-from sendgrid.helpers.mail import Mail
+
 
 message = Mail(
     from_email='theverycleverbell@gmail.com',
-    to_emails='ruchipatil@outlook.com', #'viktor.vcz88@gmail.com'),
+    to_emails='ruchipatil@outlook.com, viktor.vcz88@gmail.com'),
     subject='tine gene louise ',
     html_content=f'<strong>oh boo</strong>')
 try:
@@ -37,4 +36,3 @@ try:
     print(response.status_code)
 except Exception as e:
     print(e.message)
-'''
